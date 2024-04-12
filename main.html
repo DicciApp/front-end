@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+
+	<title>Home Page</title>
+</head>
+
+<body id="main-page">
+
+	<section class="search-container">
+		<input type="text" id="wordInput" placeholder="Enter a word...">
+		<button id="searchButton">Search</button>
+		<button id="logOutBtn">Log out</button>
+		<button id="addFavoriteBtn">Add to Favo</button>
+		<select id="favoritesDropdown">
+			<option id="">my favorites</option>
+		</select>
+	</section>
+
+	<section class="results-container">
+		<h3 id="wordName">Word Name</h3>
+
+		<div class="ressult-box">
+			<p id="partOfSpeech">Noun</p>
+			<div class="a00001">
+				<p class="def-index">1</p>
+				<div style="margin-left: 30px;">
+					<p id="definition">Definition...</p>
+					<p id="example">example</p>
+					<p id="synonyms">synonyms</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- <img id="wordImage" src="" alt="photo" /> -->
+	</section>
+
+	<script>
+		const sid = localStorage.getItem("sid");
+
+		if (!sid) {
+			window.location.href = "/index.html"
+		}
+	</script>
+
+
+	<script src="./js/global.js"></script>
+	<!-- <script src="./main.js"></script> -->
+	<script src="./test.js"></script>
+
+
+</body>
+
+</html>

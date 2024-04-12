@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<title>Document</title>
+</head>
+
+<body id="index-page">
+	<section id="signup-section">
+		<h1>Login</h1>
+		<form method="post">
+			<label id="name-label" for="name">Name:</label>
+			<input type="text" id="name" name="name">
+			<!-- here i am getting the email for the login -->
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email">
+			<!-- here i am getting the password for the login -->
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password">
+
+			<input id="submit" type="submit" value="Login">
+
+
+			<a id="change-form">No account yet? Sign up here</a>
+
+
+	</section>
+
+	<script>
+		const sid = localStorage.getItem("sid");
+
+		if (sid) {
+			window.location.href = "/main.html"
+		}
+	</script>
+
+
+	<script src="./js/global.js"></script>
+	<script src="./main.js"></script>
+</body>
+
+</html>

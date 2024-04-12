@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			try {
 				// here is the fetch to the backEnd
-				const response = await fetch('http://localhost:3000/users/login', {
+				const response = await fetch('https://diciapp-e7f35c7ad559.herokuapp.com/login', {
 
 					method: "POST",
 					// here is the headeers that is been sent to the back in json format

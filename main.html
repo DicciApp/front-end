@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/a73ecd22bb.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./style.css">
 
 	<title>Home Page</title>
 </head>
 
 <body id="main-page">
-
 	<section class="search-container">
 		<input type="text" id="wordInput" placeholder="Enter a word...">
 		<button id="searchButton">Search</button>
@@ -21,22 +21,25 @@
 		</select>
 	</section>
 
-	<section class="results-container">
-		<h3 id="wordName">Word Name</h3>
+	<section id="results-container" class="results-container">
 
-		<div class="ressult-box">
-			<p id="partOfSpeech">Noun</p>
-			<div class="a00001">
-				<p class="def-index">1</p>
-				<div style="margin-left: 30px;">
-					<p id="definition">Definition...</p>
-					<p id="example">example</p>
-					<p id="synonyms">synonyms</p>
-				</div>
+		<div id="ressult-box" class="ressult-box">
+			<span id="wordInfo">
+				<b id="wordName">Word Name</b>
+				<i id="audio-icon" class="fa-solid fa-volume-high audio-icon"></i>
+			</span>
+			<div id="definition-box">
+
 			</div>
 		</div>
+		<dialog autofocus id="image-dialog">
+			<div id="dialog-content">
+				<!-- <button id="close-dialog">X</button> -->
+				<img id="wordImage" src="" alt="photo" />
+			</div>
+		</dialog>
+		<div id="backdrop" class="backdrop"></div>
 
-		<!-- <img id="wordImage" src="" alt="photo" /> -->
 	</section>
 
 	<script>

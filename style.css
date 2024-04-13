@@ -129,15 +129,6 @@ main {
 
 
 
-
-
-
-
-
-
-
-
-
 /* home page right here  */
 
 #main-page {
@@ -145,15 +136,6 @@ main {
   font-family: Arial, sans-serif;
   height: 100vh;
   width: 100vw;
-}
-
-.search-container {
-
-  text-align: center;
-  margin-top: 100px;
-  margin-left: 90px;
-  /* background-color: red; */
-
 }
 
 #wordInput {
@@ -169,8 +151,6 @@ main {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  /* background-color: #007bff; */
-  /* color: white; */
   cursor: pointer
 }
 
@@ -181,17 +161,12 @@ main {
 .results-container {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  justify-content: center;
-  max-width: 600px;
-  height: 60%;
-  box-shadow: 20px 20px 20px 20px #060505;
+  min-height: 60%;
   margin: 20px auto;
   padding: 20px;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 h2 {
@@ -210,10 +185,10 @@ p {
 
 #results-containe,
 #wordImage {
-  max-width: 100%;
-  max-height: 250px;
-  height: 250px;
-  object-fit: cover;
+  width: 100%;
+  max-height: 800px;
+
+  /* object-fit: cover; */
 
 }
 
@@ -231,5 +206,72 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+
+.audio-icon {
+  padding: 0 5px;
+  color: rgb(7, 116, 231);
+  font-size: medium;
+}
+
+.audio-icon:hover {
+  cursor: pointer;
+}
+
+.audio-icon:active {
+  opacity: 0.7;
+}
+
+#synonyms {
+  font-size: small;
+  background: #e1e1e1;
+  padding: 4px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#synonyms-title {
+  margin: 15px 0 10px 0;
+  color: rgb(139, 139, 139);
+  font-weight: normal;
+}
+
+#wordInfo {
+  display: none;
+}
+
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* background-color: rgb(242, 30, 30); Semi-transparent backdrop */
+  display: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+dialog {
+  z-index: 1;
+  /* max-height: 800px ; */
+}
+
+
+
+dialog[open] + .backdrop {
+  z-index: 2;
+  display: block; /* Show backdrop when dialog is open */
+}
+
+
+
+#image-dialog {
+  width: 700px;
+  /* height: 700px !important; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 10px;
 
 }

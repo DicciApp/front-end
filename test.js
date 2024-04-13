@@ -1,13 +1,27 @@
 const addFavoriteBtn = document.getElementById('addFavoriteBtn')
 const favoritesDropdown = document.getElementById('favoritesDropdown')
+const playButton = document.getElementById('audio-icon')
+const resultsContainer = document.getElementById('results-container')
+const definitionBox = document.getElementById('definition-box')
+const wordInfo = document.getElementById('wordInfo')
+const dialog = document.querySelector("dialog");
+
+const wordImage = document.getElementById('wordImage')
+
+// Click event listener for the backdrop
+wordImage.addEventListener('click', function () {
+	dialog.close();
+});
+
+
+let audioUrl = ''
 
 document.addEventListener('DOMContentLoaded', () => {
-
 	const email = document.getElementById("email");
 	const password = document.getElementById("password");
 	const nameInput = document.getElementById("name");
 	const nameLabel = document.getElementById("name-label");
-	const wordImage = document.getElementById('wordImage')
+
 
 	const submit = document.getElementById("submit");
 
@@ -18,10 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const searchButton = document.getElementById('searchButton')
 	const wordInput = document.getElementById('wordInput')
 	const wordName = document.getElementById('wordName')
-	const definition = document.getElementById('definition')
-	const partOfSpeech = document.getElementById('partOfSpeech')
-	const example = document.getElementById('example')
-	const synonyms = document.getElementById('synonyms')
 
 	const logOutBtn = document.getElementById('logOutBtn')
 
@@ -32,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		return data
 	}
 
-	// add to favorit
 
 	// fet word image
 	const fetchWordImage = async (word,) => {
@@ -42,6 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		const data = await response.json();
 
 		return data
+	}
+
+	const createSynonymsOrAntonyms = (words) => {
+		if (!words) return ""
+
+
+
+		const result = words.map((word) => {
+			return `<span id="synonyms">${word}</span>`
+		})
+
+		return result.join('\n')
+
 	}
 
 
@@ -82,59 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	const login = async (e) => {
-		e.preventDefault();
-
-		if (email.value === "" || password.value === "") {
-			// change this later on to show on the loggin page
-			console.log("Please enter email and password");
-
-			return;
-
-		} else {
-
-			try {
-				// here is the fetch to the backEnd
-				const response = await fetch('https://diciapp-e7f35c7ad559.herokuapp.com/login', {
-
-					method: "POST",
-					// here is the headeers that is been sent to the back in json format
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					// Converts the email and password values to a JSON string to send as the body of the POST request.
-					body: JSON.stringify({
-						email: email.value,
-						password: password.value
-					})
-				});
-
-
-				const data = await response.json();
-				console.log(data);
-
-				if (response.ok) {
-					// if the response from the server is okay this line save a token in the local stoage and then let you in main.html
-					localStorage.setItem('sid', data.token);
-					window.location.href = "./main.html";
-				} else {
-					console.log(data.message);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	};
-
-	// here if it is checking if the submit exiist in this page and if it is true execute this code
-
-	if (submit) {
-		submit.addEventListener("click", login);
-	}
-
 	// here if it is checking if the searchbutton  exiist in this page and if it is true execute this
 	if (searchButton) {
 		searchButton.addEventListener('click', async () => {
+			audioUrl = ''
 
 			// here word is saving whaever the user put in the put
 			const word = wordInput.value;
@@ -155,32 +128,53 @@ document.addEventListener('DOMContentLoaded', () => {
 				})
 			})
 
-
 			console.log(result);
 
+			audioUrl = result[0].phonetics[0].audio
+
+			dialog.showModal();
+			wordInfo.style.display = "block"
+			wordName.textContent = word
+
+			const image = await fetchWordImage(word)
+
+			wordImage.src = image.results[0].urls.regular
 
 
-			//  if there is data in here
-			if (data.length > 0) {
 
-				// save the first result into this variable 
-				const firstResult = data[0]
-				// here is accessing to the first object of the array and telling that we are only instering in the meanings 
-				const meanings = firstResult.meanings[0];
+			const itemHtml = result.map((item, index) => {
+				return `
+					<div>
+						<p id="partOfSpeech">${item.partOfSpeech}</p>
+						<div class="a00001">
+							<p class="def-index">${index + 1}</p>
+							<div style="margin-left: 30px;">
+								<b id="definition">${item.definition}</b>
+								${createSynonymsOrAntonyms(item.synonyms) && `
+									<div>
+										<h4 id="synonyms-title">Synonyms</h4>
+										${createSynonymsOrAntonyms(item.synonyms)}
+									</div>
+								`}
+								${createSynonymsOrAntonyms(item.antonyms) && `
+									<div>
+										<p id="antonyms-title">Antonyms</p>
+										${createSynonymsOrAntonyms(item.antonyms)}
+									</div>
+								`}
+							</div>
+						</div>
+					</div>
+				`}).join('\n')
 
-				wordName.textContent = word;
-				definition.textContent = `${meanings.definitions[0].definition}`;
-				partOfSpeech.textContent = `${meanings.partOfSpeech}`;
-				example.textContent = `Example : ${meanings.definitions[0].example}`;
-				synonyms.textContent = `Synonyms: : ${meanings.definitions[0].synonyms.join(', ')}`;
 
-				const image = await fetchWordImage(word)
-				wordImage.src = image.results[0].urls.regular;
+			const html = `
+				<div class="ressult-box">
+					${itemHtml}
+				</div>
+			`
 
-
-			} else {
-				alert('Word not found')
-			}
+			definitionBox.innerHTML = html.toString() || '';
 
 			logOutBtn.addEventListener('click', () => {
 				localStorage.removeItem('sid');
@@ -192,37 +186,46 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const addToFavorite = async (body) => {
-	const response = await fetch('http://localhost:3000/favorites', {
+	const response = fetch('http://localhost:3000/favorites/', {
 		method: 'POST',
-		body: JSON.stringify(body)
+		body: JSON.stringify({
+			token: body.token,
+			word: body.word
+		})
 	})
 
 	const data = await response.json()
 	return data
 }
 
+playButton.addEventListener('click', async () => {
+	console.log(audioUrl, "audio url");
+	if (!audioUrl) return
+	const audio = new Audio(audioUrl);
+	audio.play();
+})
+
 addFavoriteBtn.addEventListener('click', async () => {
 	// word that user wants to add to favorites
 	const word = wordInput.value
-	// console.log(word);
-	try {
+	console.log(word, sid);
 
-		const favorite = await addToFavorite({
-			word,
-			token: sid
+	fetch('http://localhost:3000/favorites', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"token": sid,
+			"word": word
 		})
-
-		console.log({ favorite });
-
-		// if ((await response).ok) {
-		// 	const option = new Option(word, word);
-		// 	favoritesDropdown.add(option)
-		// 	console.log('word added to favorites succefully')
-		// } else {
-		// 	console.log("error adding word to favorites")
-		// }
-
-	} catch (error) {
-		console.error('Error', error)
-	}
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+		})
+		.catch(error => {
+			console.error("Error fetching data: ", error);
+		});
 })
+

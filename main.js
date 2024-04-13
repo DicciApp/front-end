@@ -75,20 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else {
 
 			try {
+				console.log(email.value, password.value, "login");
 				// here is the fetch to the backEnd
-				const response = await fetch('https://diciapp-e7f35c7ad559.herokuapp.com/login', {
-					
-
+				const response = await fetch('http://localhost:3000/users/login', {
 					method: "POST",
 					// here is the headeers that is been sent to the back in json format
 					headers: {
 						'Content-Type': 'application/json'
 					},
 					// Converts the email and password values to a JSON string to send as the body of the POST request.
-					body: JSON.stringify({
-						email: email.value,
-						password: password.value
-					})
+					body: JSON.stringify(
+						{
+							"email": email.value,
+							"password": password.value
+						}
+					)
 				});
 
 
@@ -109,11 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	// here if it is checking if the submit exiist in this page and if it is true execute this code
-
-	if (submit) {
-
-		submit.addEventListener("click", login);
-	}
+	submit.addEventListener("click", login);
 
 	// here is my api  for unsplashAPI
 	const unsplashApiKey = 'N2T8g7oMb65LYBX5e0Dp_YguPYsyboVLaU4Dy146LVM'
@@ -225,9 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				window.location.href = "./index.html";
 			})
 		})
-
-
-
 	}
 
 

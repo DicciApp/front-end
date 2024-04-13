@@ -3,7 +3,7 @@
   font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
-  background-image: url('./bg.webp');
+  background-image: url('./assets/bg.webp');
   /* justify-content: flex-end; */
   background-position: right;
   width: 100vw;
@@ -26,6 +26,8 @@ html {
   justify-content: center;
 
 }
+
+
 
 #signup-section {
 
@@ -178,9 +180,8 @@ p {
 }
 
 #logOutBtn {
-  position: relative;
-  left: 300px;
-
+  height: 30px;
+  margin-left: 10px
 }
 
 #results-containe,
@@ -241,6 +242,13 @@ p {
   display: none;
 }
 
+#wordName {
+  font-size: 24px;
+}
+i {
+  margin: 0 4px;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.7));
+}
 .backdrop {
   position: fixed;
   width: 100%;
@@ -260,9 +268,10 @@ dialog {
 
 
 
-dialog[open] + .backdrop {
+dialog[open]+.backdrop {
   z-index: 2;
-  display: block; /* Show backdrop when dialog is open */
+  display: block;
+  /* Show backdrop when dialog is open */
 }
 
 
@@ -274,4 +283,24 @@ dialog[open] + .backdrop {
   border: none;
   border-radius: 10px;
 
+}
+
+.hover:hover {
+  cursor: pointer;
+}
+
+.hover:active {
+  opacity: 0.7;
+}
+
+.hide-start {
+  display: none;
+}
+
+.search-container {
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

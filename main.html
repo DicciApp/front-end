@@ -5,29 +5,41 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://kit.fontawesome.com/a73ecd22bb.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="./styles/style.css">
 
 	<title>Home Page</title>
 </head>
 
 <body id="main-page">
-	<section class="search-container">
-		<input type="text" id="wordInput" placeholder="Enter a word...">
-		<button id="searchButton">Search</button>
-		<button id="logOutBtn">Log out</button>
-		<button id="addFavoriteBtn">Add to Favo</button>
-		<select id="favoritesDropdown">
-			<option id="">my favorites</option>
-		</select>
+	<section class="search-container" style="display: flex;">
+		<div>
+			<input type="text" id="wordInput" placeholder="Enter a word...">
+			<button id="searchButton">Search</button>
+		</div>
+		<div style="display: flex; align-items: center;">
+			<a href="/favorites.html"  id="viewFavoriteBtn">View Favorites</a>
+			<button id="logOutBtn">Log out</button>
+			<!-- <select id="favoritesDropdown">
+				<option id="">my favorites</option>
+			</select> -->
+		</div>
 	</section>
 
 	<section id="results-container" class="results-container">
 
 		<div id="ressult-box" class="ressult-box">
-			<span id="wordInfo">
-				<b id="wordName">Word Name</b>
-				<i id="audio-icon" class="fa-solid fa-volume-high audio-icon"></i>
-			</span>
+			<div id="wordInfo">
+				<div style="display: flex; align-items: center;">
+					<b id="wordName">
+						Word Name
+					</b>
+					<i id="audio-icon" class="fa-solid fa-volume-high hover audio-icon"></i>
+					<i id="addFavoriteStar" class="fa-regular fa-star hover hide-start"></i>
+					<i id="removeFavoriteStar" style="color:rgb(0, 255, 51);"
+						class="fa-solid fa-star hover hide-start"></i>
+						<i id="image-icon" class="fa-regular fa-image"></i>
+				</div>
+			</div>
 			<div id="definition-box">
 
 			</div>
@@ -53,8 +65,8 @@
 
 	<script src="./js/global.js"></script>
 	<!-- <script src="./main.js"></script> -->
-	<script src="./test.js"></script>
-
+	<script src="./js/test.js"></script>
+	<script src="./js/handleFavorites.js"></script>
 
 </body>
 

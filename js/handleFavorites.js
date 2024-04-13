@@ -1,6 +1,4 @@
-
-
-removeFavoriteStar.addEventListener('click', async (e) => {
+removeFavoriteStar?.addEventListener('click', async (e) => {
 	const response = await fetch(`http://localhost:3000/favorites/${wordInput.value}`, {
 		method: 'DELETE',
 		headers: {
@@ -24,7 +22,7 @@ removeFavoriteStar.addEventListener('click', async (e) => {
 })
 
 
-addFavoriteStar.addEventListener('click', async () => {
+addFavoriteStar?.addEventListener('click', async () => {
 	// word that user wants to add to favorites
 	const word = wordInput.value
 	const response = await fetch('http://localhost:3000/favorites', {
@@ -50,3 +48,20 @@ addFavoriteStar.addEventListener('click', async () => {
 		removeFavoriteStar.style.display = 'none'
 	}
 })
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+	const userFavorites = await getUserFavorites()
+
+
+	const listElement = (userFavorites) => {
+		return `
+		<ul>
+			${userFavorites.map((favorite) => `<li>${favorite.word}</li>`).join('\n')}
+		</ul>
+		`
+	}
+
+	favoritesMain?.innerHTML = listElement(userFavorites) ;
+})
+

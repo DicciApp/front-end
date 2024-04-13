@@ -3,7 +3,7 @@
   font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
-  background-image: url('./assets/bg.webp');
+  background-image: url('../assets/bg.webp');
   /* justify-content: flex-end; */
   background-position: right;
   width: 100vw;

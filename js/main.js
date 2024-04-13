@@ -45,16 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		changeForm.addEventListener("click", (e) => {
 			e.preventDefault();
 
-			if (e.target.innerText === "Sign Up") {
-
+			if (submit.name === "login") {
 				nameInput.style.display = "block";
 				nameLabel.style.display = "block";
-				e.target.innerText = "Login";
+
+				e.target.innerText = "Already have an account? Login here";
+				formTitle.innerText = "Sign Up"
+				submit.name = "signup";
 				submit.value = "Sign Up";
+
 			} else {
 				nameInput.style.display = "none";
 				nameLabel.style.display = "none";
-				e.target.innerText = "Sign Up";
+
+				e.target.innerText = "No account yet? Sign up here";
+				formTitle.innerText = "Login"
+				submit.name = "login";
 				submit.value = "Login";
 			}
 		});
@@ -63,54 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	const login = async (e) => {
-		e.preventDefault();
-
-		if (email.value === "" || password.value === "") {
-			// change this later on to show on the loggin page
-			console.log("Please enter email and password");
-
-			return;
-
-		} else {
-
-			try {
-				console.log(email.value, password.value, "login");
-				// here is the fetch to the backEnd
-				const response = await fetch('http://localhost:3000/users/login', {
-					method: "POST",
-					// here is the headeers that is been sent to the back in json format
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					// Converts the email and password values to a JSON string to send as the body of the POST request.
-					body: JSON.stringify(
-						{
-							"email": email.value,
-							"password": password.value
-						}
-					)
-				});
-
-
-				const data = await response.json();
-				console.log(data);
-
-				if (response.ok) {
-					// if the response from the server is okay this line save a token in the local stoage and then let you in main.html
-					localStorage.setItem('sid', data.token);
-					window.location.href = "./main.html";
-				} else {
-					console.log(data.message);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	};
-
 	// here if it is checking if the submit exiist in this page and if it is true execute this code
-	submit.addEventListener("click", login);
+	submit.addEventListener("click", async (e) => {
+		e.preventDefault();
+		if (e.target.name === "login") {
+			await login();
+		} else {
+			await signUp();
+		}
+	});
 
 	// here is my api  for unsplashAPI
 	const unsplashApiKey = 'N2T8g7oMb65LYBX5e0Dp_YguPYsyboVLaU4Dy146LVM'
@@ -223,6 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 	}
+
+
+
 
 
 })

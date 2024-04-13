@@ -27,9 +27,11 @@ const wordInput = document.getElementById('wordInput')
 const wordName = document.getElementById('wordName')
 const logOutBtn = document.getElementById('logOutBtn')
 
+const SERVER_URL = 'https://diciapp-e7f35c7ad559.herokuapp.com'; 
+
 
 async function fetchWordInFavorites(word) {
-	const response = await fetch(`http://localhost:3000/favorites/${word}`, {
+	const response = await fetch(`${SERVER_URL}/favorites/${word}`, {
 		headers: {
 			'token': sid
 		}
@@ -45,7 +47,6 @@ async function fetchWordInFavorites(word) {
 		addFavoriteStar.style.display = 'block'
 	}
 
-	console.log({ data });
 	return data
 }
 
@@ -55,7 +56,6 @@ async function fetchWord(word) {
 	const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
 	const data = await response.json()
 
-	console.log({ data });
 	return data
 }
 
@@ -82,7 +82,7 @@ function createSynonymsOrAntonyms(words) {
 
 
 async function getUserFavorites() {
-	const response = await fetch(`http://localhost:3000/favorites`, {
+	const response = await fetch(`${SERVER_URL}/favorites`, {
 		headers: {
 			'token': localStorage.getItem('sid')
 		}
@@ -90,14 +90,13 @@ async function getUserFavorites() {
 
 	const data = await response.json()
 
-	// console.log({ data });
 	return data
 }
 
 
 // sign up
 async function signUp() {
-	const response = await fetch('http://localhost:3000/users/signup', {
+	const response = await fetch(`${SERVER_URL}/users/signup`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -125,16 +124,14 @@ async function signUp() {
 const login = async () => {
 	if (email.value === "" || password.value === "") {
 		// change this later on to show on the loggin page
-		console.log("Please enter email and password");
-
+		alert("Please enter email and password");
 		return;
 
 	} else {
 
 		try {
-			console.log(email.value, password.value, "login");
 			// here is the fetch to the backEnd
-			const response = await fetch('http://localhost:3000/users/login', {
+			const response = await fetch(`${SERVER_URL}/users/login`, {
 				method: "POST",
 				// here is the headeers that is been sent to the back in json format
 				headers: {
@@ -151,7 +148,6 @@ const login = async () => {
 
 
 			const data = await response.json();
-			console.log(data);
 
 			if (!!data.token) {
 				// if the response from the server is okay this line save a token in the local stoage and then let you in main.html
@@ -166,3 +162,57 @@ const login = async () => {
 		}
 	}
 };
+
+
+logOutBtn.addEventListener('click', () => {
+	localStorage.clear('sid');
+	window.location.reload();
+})
+
+
+removeFavoriteStar.addEventListener('click', async (e) => {
+	const response = await fetch(`${SERVER_URL}/favorites/${wordInput.value}`, {
+		method: 'DELETE',
+		headers: {
+			'token': localStorage.getItem("sid")
+		}
+	})
+
+	const data = await response.json()
+	if (!!data) {
+		addFavoriteStar.style.display = 'block'
+		removeFavoriteStar.style.display = 'none'
+
+	} else {
+		removeFavoriteStar.style.display = 'block'
+		addFavoriteStar.style.display = 'none'
+	}
+
+})
+
+
+addFavoriteStar.addEventListener('click', async () => {
+	// word that user wants to add to favorites
+	const word = wordInput.value
+	const response = await fetch(`${SERVER_URL}/favorites`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"token": localStorage.getItem("sid"),
+			"word": word
+		})
+	})
+
+	const data = await response.json()
+
+	if (!!data.error) {
+		addFavoriteStar.style.display = 'none'
+		removeFavoriteStar.style.display = 'block'
+
+	} else {
+		addFavoriteStar.style.display = 'block'
+		removeFavoriteStar.style.display = 'none'
+	}
+})

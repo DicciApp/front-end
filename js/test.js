@@ -13,7 +13,6 @@ imageIcon.addEventListener('click', function () {
 document.addEventListener('DOMContentLoaded', () => {
 	const sid = localStorage.getItem("sid")
 
-
 	// // here is the token that is saved in the locaStorage
 
 	if (sid) {
@@ -73,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				})
 			})
 
-			console.log(result);
 
 			audioUrl = result[0].phonetics[0].audio
 
@@ -131,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const addToFavorite = async (body) => {
-	const response = fetch('http://localhost:3000/favorites/', {
+	const response = fetch(`${SERVER_URL}/favorites/`, {
 		method: 'POST',
 		body: JSON.stringify({
 			token: body.token,
@@ -144,30 +142,7 @@ const addToFavorite = async (body) => {
 }
 
 playButton.addEventListener('click', async () => {
-	console.log(audioUrl, "audio url");
 	if (!audioUrl) return
 	const audio = new Audio(audioUrl);
 	audio.play();
 })
-
-addFavoriteBtn.addEventListener('click', async () => {
-	// word that user wants to add to favorites
-	const word = wordInput.value
-	console.log(word, sid);
-
-	fetch('http://localhost:3000/favorites', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			"token": sid,
-			"word": word
-		})
-	}).then(response => response.json()).then(data => {
-		console.log(data);
-	}).catch(error => {
-		console.error("Error fetching data: ", error);
-	});
-})
-

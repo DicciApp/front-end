@@ -1,4 +1,4 @@
-DicciApp 
+DICCIAPP
 
 **Project Description**
 

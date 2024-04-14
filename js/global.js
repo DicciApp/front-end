@@ -26,17 +26,21 @@ const searchButton = document.getElementById('searchButton')
 const wordInput = document.getElementById('wordInput')
 const wordName = document.getElementById('wordName')
 const logOutBtn = document.getElementById('logOutBtn')
-
+// variables for herokuapp
 const SERVER_URL = 'https://diciapp-e7f35c7ad559.herokuapp.com'; 
 
 
+
+// fetch word to remove and add favorite
 async function fetchWordInFavorites(word) {
 	const response = await fetch(`${SERVER_URL}/favorites/${word}`, {
+		// here is the header that is been sent to the back in json format
 		headers: {
 			'token': sid
 		}
 	})
 
+// once the response is has been received by the server this line convert the response to json
 	const data = await response.json()
 
 	if (data) {
@@ -64,6 +68,7 @@ async function fetchWord(word) {
 async function fetchWordImage(word) {
 	const unsplashApiKey = 'N2T8g7oMb65LYBX5e0Dp_YguPYsyboVLaU4Dy146LVM'
 
+	// here a function is define that takes an argument and returns a promise
 	const response = await fetch(`https://api.unsplash.com/search/photos?query=${word}&client_id=${unsplashApiKey}`);
 	const data = await response.json();
 

@@ -152,12 +152,14 @@ main {
 #searchButton {
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer
+  border-radius: 10px;
+  cursor: pointer;
+ font-family: 'Times New Roman', Times, serif;
+
 }
 
 #searchButton:hover {
-  background-color: #0069d9;
+  background-color: #0069d9a7;
 }
 
 .results-container {
@@ -168,7 +170,7 @@ main {
   padding: 20px;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
 }
 
 h2 {
@@ -180,8 +182,16 @@ p {
 }
 
 #logOutBtn {
-  height: 30px;
-  margin-left: 10px
+  height: 40px;
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#logOutBtn:hover {
+  background-color: #0069d9a7;
 }
 
 #results-containe,
@@ -189,7 +199,7 @@ p {
   width: 100%;
   max-height: 800px;
 
-  /* object-fit: cover; */
+
 
 }
 
@@ -255,7 +265,7 @@ i {
   height: 100%;
   top: 0;
   left: 0;
-  /* background-color: rgb(242, 30, 30); Semi-transparent backdrop */
+
   display: none;
   cursor: pointer;
   z-index: 2;
@@ -263,10 +273,8 @@ i {
 
 dialog {
   z-index: 1;
-  /* max-height: 800px ; */
+  
 }
-
-
 
 dialog[open]+.backdrop {
   z-index: 2;
@@ -278,7 +286,6 @@ dialog[open]+.backdrop {
 
 #image-dialog {
   width: 700px;
-  /* height: 700px !important; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border: none;
   border-radius: 10px;
@@ -303,4 +310,40 @@ dialog[open]+.backdrop {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#FavoritesTittle{
+ font-family: 'Times New Roman', Times, serif;
+}
+
+#favorites-main {
+  height: 25%;
+  width: 20%;
+  background-color: white;
+  box-shadow: 0px 2px 3px black;
+}
+
+#viewFavoriteBtn {
+  font-family: 'Times New Roman', Times, serif;
+ text-decoration: none;
+ font-size: 30px;
+ animation: changeColor infinite 6s;
+}
+
+@keyframes changeColor {
+  0% {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  60% {
+    color: green;
+  }
+  70% {
+    color: yellow;
+  }
+  100% {
+    color: red;
+  }
 }

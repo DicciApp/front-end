@@ -17,11 +17,9 @@
 			<button id="searchButton">Search</button>
 		</div>
 		<div style="display: flex; align-items: center;">
-			<a href="/favorites.html"  id="viewFavoriteBtn">View Favorites</a>
+			<a href="/favorites.html" id="viewFavoriteBtn">View Favorites</a>
 			<button id="logOutBtn">Log out</button>
-			<!-- <select id="favoritesDropdown">
-				<option id="">my favorites</option>
-			</select> -->
+
 		</div>
 	</section>
 
@@ -35,18 +33,17 @@
 					</b>
 					<i id="audio-icon" class="fa-solid fa-volume-high hover audio-icon"></i>
 					<i id="addFavoriteStar" class="fa-regular fa-star hover hide-start"></i>
-					<i id="removeFavoriteStar" style="color:rgb(0, 255, 51);"
-						class="fa-solid fa-star hover hide-start"></i>
-						<i id="image-icon" class="fa-regular fa-image hover"></i>
+					<i id="removeFavoriteStar" style="color:rgb(0, 255, 51);" class="fa-solid fa-star hover hide-start"></i>
+					<i id="image-icon" class="fa-regular fa-image hover"></i>
 				</div>
 			</div>
 			<div id="definition-box">
 
 			</div>
 		</div>
+		<!-- <button id="close-dialog">X</button> -->
 		<dialog autofocus id="image-dialog">
 			<div id="dialog-content">
-				<!-- <button id="close-dialog">X</button> -->
 				<img id="wordImage" src="" alt="photo" />
 			</div>
 		</dialog>
@@ -55,6 +52,8 @@
 	</section>
 
 	<script>
+
+		// if the token is not saved in the localStorage it will redirect to the index.html page
 		const sid = localStorage.getItem("sid");
 
 		if (!sid) {
@@ -65,7 +64,6 @@
 
 	<script src="./js/global.js"></script>
 	<script src="./js/handleFavorites.js"></script>
-	<!-- <script src="./main.js"></script> -->
 	<script src="./js/test.js"></script>
 
 </body>

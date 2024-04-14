@@ -1,3 +1,5 @@
+DicciApp 
+
 **Project Description**
 
 DicciApp is a  dictionary application  that lets you easily find, add, and remove your favorite words.  Whether you love words or just want to learn more. With its easy-to-use design and useful features, DicciApp is perfect for language lovers and learners of all levels. 

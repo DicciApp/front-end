@@ -6,11 +6,11 @@ DicciApp is a  dictionary application  that lets you easily find, add, and remov
 
 **Initial Landing View**
 
-![Screenshot 2024-04-14 at 2.11.37 PM.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2f90f807-75f8-4ef1-8a99-3ff173dc9d4d/4b1713d5-c16b-42cf-871b-f8c51a93247f/Screenshot_2024-04-14_at_2.11.37_PM.png)
+<img width="1637" alt="Screenshot 2024-04-14 at 2 11 37 PM" src="https://github.com/DicciApp/front-end/assets/152093575/038d02ac-f320-46a8-8dfd-aff4ee30d789">
 
 Home Page
 
-![Screenshot 2024-04-14 at 2.15.56 PM.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/2f90f807-75f8-4ef1-8a99-3ff173dc9d4d/89ff2593-4b9a-4a02-8aef-fc876c324d8f/Screenshot_2024-04-14_at_2.15.56_PM.png)
+<img width="1665" alt="Screenshot 2024-04-14 at 2 15 56 PM" src="https://github.com/DicciApp/front-end/assets/152093575/c375fa87-d5ef-49ea-b3bf-6b8615818c21">
 
 # **Getting Started**
 
